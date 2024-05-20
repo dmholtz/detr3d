@@ -139,14 +139,12 @@ db_sampler = dict(
     sample_groups=dict(
         car=2,
         truck=3,
-        construction_vehicle=7,
         bus=4,
-        trailer=6,
-        barrier=2,
+        ambulance=6,
         motorcycle=6,
         bicycle=6,
         pedestrian=2,
-        traffic_cone=2),
+    ),
     points_loader=dict(
         type='LoadPointsFromFile',
         coord_type='LIDAR',
