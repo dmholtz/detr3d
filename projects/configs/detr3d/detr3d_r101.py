@@ -17,7 +17,7 @@ img_norm_cfg = dict(
 # overwrite nus-3d config (ours)
 class_names = [
     'car', 'truck', 'ambulance', 'bus',
-    'motorcycle', 'bicycle', 'pedestrian',
+    'bicycle', 'motorcycle', 'pedestrian',
 ]
 
 input_modality = dict(
@@ -35,7 +35,7 @@ model = dict(
         depth=101,
         num_stages=4,
         out_indices=(0, 1, 2, 3),
-        frozen_stages=1,
+        frozen_stages=2,
         norm_cfg=dict(type='BN2d', requires_grad=False),
         norm_eval=True,
         style='caffe',
@@ -87,7 +87,7 @@ model = dict(
             pc_range=point_cloud_range,
             max_num=300,
             voxel_size=voxel_size,
-            num_classes=7), 
+            num_classes=10), 
         positional_encoding=dict(
             type='SinePositionalEncoding',
             num_feats=128,
