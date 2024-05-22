@@ -119,39 +119,6 @@ data_root = 'data/nuscenes/'
 
 file_client_args = dict(backend='disk')
 
-db_sampler = dict(
-    data_root=data_root,
-    info_path=data_root + 'detr_dbinfos_train.pkl',
-    rate=1.0,
-    prepare=dict(
-        filter_by_difficulty=[-1],
-        filter_by_min_points=dict(
-            car=1,
-            truck=1,
-            bus=1,
-            ambulance=1,
-            motorcycle=1,
-            bicycle=1,
-            pedestrian=1,
-        )
-    ),
-    classes=class_names,
-    sample_groups=dict(
-        car=2,
-        truck=3,
-        bus=4,
-        ambulance=6,
-        motorcycle=6,
-        bicycle=6,
-        pedestrian=2,
-    ),
-    points_loader=dict(
-        type='LoadPointsFromFile',
-        coord_type='LIDAR',
-        load_dim=5,
-        use_dim=[0, 1, 2, 3, 4],
-        file_client_args=file_client_args))
-
 train_pipeline = [
     dict(type='LoadMultiViewImageFromFiles', to_float32=True),
     dict(type='PhotoMetricDistortionMultiViewImage'),
@@ -213,7 +180,7 @@ data = dict(
 
 optimizer = dict(
     type='AdamW', 
-    lr=2e-4,
+    lr=1e-4,
     paramwise_cfg=dict(
         custom_keys={
             'img_backbone': dict(lr_mult=0.1),
