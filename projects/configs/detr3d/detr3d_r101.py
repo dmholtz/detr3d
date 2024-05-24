@@ -1,5 +1,4 @@
 _base_ = [
-    '../../../mmdetection3d/configs/_base_/datasets/nus-3d.py',
     '../../../mmdetection3d/configs/_base_/default_runtime.py'
 ]
 
@@ -165,16 +164,24 @@ data = dict(
         # and box_type_3d='Depth' in sunrgbd and scannet dataset.
         box_type_3d='LiDAR'),
     val=dict(
+        type=dataset_type,
+        data_root=data_root,
         pipeline=test_pipeline,
         ann_file=data_root + 'detr_infos_val.pkl',
         classes=class_names,
-        modality=input_modality
+        modality=input_modality,
+        test_mode=True,
+        box_type_3d='LiDAR',
     ),
     test=dict(
+        type=dataset_type,
+        data_root=data_root,
         pipeline=test_pipeline,
         ann_file=data_root + 'detr_infos_val.pkl',
         classes=class_names,
-        modality=input_modality
+        modality=input_modality,
+        test_mode=True,
+        box_type_3d='LiDAR',
     )
 )
 
@@ -196,6 +203,8 @@ lr_config = dict(
     min_lr_ratio=1e-3)
 total_epochs = 24
 evaluation = dict(interval=8, pipeline=test_pipeline)
+
+checkpoint_config = dict(interval=24)
 
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 # load_from='ckpts/fcos3d.pth'
